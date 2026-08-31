@@ -1,0 +1,342 @@
+/* 数据模块：eco（由 data.js 拆分，结构原样保留；可用 G.def 注册器继续叠加扩展） */
+var G = window.GAME.data || (window.GAME.data = {})
+G.REGION_ITEMS = {
+  '营地平原': [
+    { id: 'mat_fungus', name: '菌毯碎块', desc: '营地下菌毯的碎块，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 4, restoreDays: 1, harvestTime: 10 },
+    { id: 'fat_fungus', name: '肥厚菌丛', desc: '营地边疯长的肥厚菌丛。', harvest: { item: 'fungus', amount: 2 }, stock: 2, restoreDays: 2, harvestTime: 15 },
+    { id: 'dew_moss', name: '晨露苔藓', desc: '挂满晨露的苔藓，挤压可收集盐水。', harvest: { item: 'brine', amount: 1 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'puddle', name: '集水洼', desc: '雨后积起的水洼，舀取可得盐水。', harvest: { item: 'brine', amount: 2 }, stock: 2, restoreDays: 1, harvestTime: 12 },
+    { id: 'dry_stem', name: '干枯菌杆', desc: '风干的菌杆，耐储存。', harvest: { item: 'fungus', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 12 },
+    { id: 'tin_can', name: '空罐头', desc: '废弃的空罐头，可以回收金属。', harvest: { item: 'metal', amount: 1 }, finite: true, stock: 3, harvestTime: 8 },
+    { id: 'camp_scrap', name: '营地废料', desc: '营地残留下的零碎金属。', harvest: { item: 'metal', amount: 1 }, finite: true, stock: 4, harvestTime: 12 },
+  ],
+  '共生森林': [
+    { id: 'glow_moss', name: '荧光苔藓', desc: '发出幽光的苔藓，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 4, restoreDays: 1, harvestTime: 10 },
+    { id: 'vine_stem', name: '藤蔓茎', desc: '坚韧的藤蔓茎，能提取纤维。', harvest: { item: 'fiber', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 15 },
+    { id: 'bark_board', name: '树皮板', desc: '从巨树上剥下的完整树皮。', harvest: { item: 'wood', amount: 1 }, stock: 2, restoreDays: 3, harvestTime: 22 },
+    { id: 'fruit_pile', name: '落果堆', desc: '树下腐烂的落果，仍可食用。', harvest: { item: 'fungus', amount: 2 }, stock: 2, restoreDays: 1, harvestTime: 10 },
+    { id: 'fungus_log', name: '菌木', desc: '长满菌丝的朽木，可作建材。', harvest: { item: 'wood', amount: 2 }, stock: 2, restoreDays: 3, harvestTime: 20 },
+    { id: 'resin_lump', name: '树脂瘤', desc: '树干上渗出凝固的树脂。', harvest: { item: 'resin', amount: 1 }, stock: 2, restoreDays: 4, harvestTime: 18 },
+  ],
+  '甲烷湖泽': [
+    { id: 'brine_pool', name: '盐水洼', desc: '洼地里积着盐水，采集可得盐水。', harvest: { item: 'brine', amount: 2 }, stock: 3, restoreDays: 1, harvestTime: 12 },
+    { id: 'reed_bundle', name: '芦苇束', desc: '成捆的芦苇，能提取纤维。', harvest: { item: 'fiber', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 15 },
+    { id: 'lake_clay', name: '湖底黏土', desc: '细腻的湖底黏土，可作建材。', harvest: { item: 'clay', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 18 },
+    { id: 'dead_fish', name: '搁浅死鱼', desc: '搁浅的异星鱼，可作样本。', harvest: { item: 'specimen', amount: 1 }, finite: true, stock: 2, harvestTime: 8 },
+    { id: 'mud_ball', name: '湖泥球', desc: '裹着矿物的湖泥球。', harvest: { item: 'stone', amount: 1 }, stock: 2, restoreDays: 3, harvestTime: 16 },
+  ],
+  '远古遗迹': [
+    { id: 'pillar_chip', name: '石柱残片', desc: '断裂石柱的残片，可作石材。', harvest: { item: 'stone', amount: 2 }, finite: true, stock: 3, harvestTime: 22 },
+    { id: 'rusted_metal', name: '锈蚀金属', desc: '锈迹斑斑的异星金属。', harvest: { item: 'metal', amount: 2 }, finite: true, stock: 3, harvestTime: 20 },
+    { id: 'relic_fragment', name: '古物碎片', desc: '刻满纹路的古物，值得研究。', research: { data: 5 }, finite: true, stock: 2, researchTime: 25 },
+    { id: 'relief_brick', name: '浮雕石砖', desc: '带浮雕的石砖，可作建材。', harvest: { item: 'stone', amount: 2 }, finite: true, stock: 3, harvestTime: 24 },
+  ],
+  '幽深洞窟': [
+    { id: 'stalactite', name: '钟乳石', desc: '洞顶垂下的钟乳石尖。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 3, harvestTime: 25 },
+    { id: 'wall_crystal', name: '洞壁矿晶', desc: '嵌在洞壁的发光矿晶。', harvest: { item: 'metal', amount: 1 }, research: { data: 4 }, stock: 2, restoreDays: 4, harvestTime: 22, researchTime: 18 },
+    { id: 'cave_slime', name: '洞穴黏菌', desc: '洞壁渗出的黏菌，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'crystal_chunk', name: '晶石碎块', desc: '破碎的晶簇，蕴含知识。', research: { data: 5 }, stock: 2, restoreDays: 4, researchTime: 22 },
+    { id: 'gem_chunk', name: '宝石碎块', desc: '洞中散落的发光宝石碎块。', harvest: { item: 'gem', amount: 1 }, finite: true, stock: 2, harvestTime: 18 },
+  ],
+  '地热裂谷': [
+    { id: 'sulfur_crystal', name: '硫磺结晶', desc: '热泉边析出的硫磺结晶。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 15 },
+    { id: 'lava_lump', name: '熔岩凝块', desc: '冷却的熔岩凝块，质地坚硬。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 3, harvestTime: 20 },
+    { id: 'geo_spore', name: '地热孢子', desc: '热浪中飘荡的孢子，富含营养。', harvest: { item: 'fungus', amount: 2 }, stock: 2, restoreDays: 1, harvestTime: 12 },
+    { id: 'vein_sample', name: '矿脉样本', desc: '地脉中带出的矿脉样本。', harvest: { item: 'metal', amount: 2 }, finite: true, stock: 2, harvestTime: 20 },
+    { id: 'geo_amber', name: '地热琥珀', desc: '热泉凝结的琥珀，富含树脂。', harvest: { item: 'resin', amount: 1 }, stock: 2, restoreDays: 4, harvestTime: 16 },
+  ],
+  '地脉核心': [
+    { id: 'core_shard', name: '脉动核心碎片', desc: '地脉核心脱落的碎片，蕴含知识。', research: { data: 8 }, finite: true, stock: 2, researchTime: 28 },
+    { id: 'core_metal', name: '地脉金属', desc: '被地脉滋养过的稀有金属。', harvest: { item: 'metal', amount: 2 }, finite: true, stock: 3, harvestTime: 25 },
+    { id: 'core_spore', name: '心核孢', desc: '核心附近生长的孢体，可食用。', harvest: { item: 'fungus', amount: 2 }, stock: 2, restoreDays: 1, harvestTime: 12 },
+  ],
+  '极高山脉': [
+    { id: 'ice_crystal', name: '冰晶簇', desc: '冰壁上凝结的冰晶，折射出知识。', research: { data: 6 }, stock: 3, restoreDays: 2, researchTime: 20 },
+    { id: 'snow_branch', name: '雪松枝', desc: '积雪压断的松枝，可作木材。', harvest: { item: 'wood', amount: 2 }, finite: true, stock: 2, harvestTime: 18 },
+    { id: 'cold_moss', name: '寒地苔藓', desc: '岩缝中的寒地苔藓，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 10 },
+    { id: 'snow_bone', name: '雪鸟骨', desc: '冻死的雪鸟留下的骸骨。', harvest: { item: 'bone', amount: 1 }, finite: true, stock: 2, harvestTime: 14 },
+  ],
+  '冰封冻野': [
+    { id: 'frozen_meat', name: '冻肉块', desc: '冻得梆硬的肉块，解冻可食。', harvest: { item: 'fungus', amount: 2 }, finite: true, stock: 2, harvestTime: 15 },
+    { id: 'ice_shard', name: '冰晶', desc: '冰原上散落的纯净冰晶。', research: { data: 6 }, stock: 3, restoreDays: 2, researchTime: 20 },
+    { id: 'frozen_bone', name: '冻原兽骨', desc: '冻原野兽的骸骨。', harvest: { item: 'bone', amount: 2 }, finite: true, stock: 3, harvestTime: 18 },
+    { id: 'tundra_grass', name: '冻原草', desc: '冻原上坚韧的枯草。', harvest: { item: 'fiber', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 12 },
+  ],
+  '盐晶荒原': [
+    { id: 'salt_crystal', name: '盐晶', desc: '天然形成的盐晶，值得研究。', research: { data: 5 }, stock: 3, restoreDays: 2, researchTime: 22 },
+    { id: 'salt_grass', name: '盐渍草', desc: '被盐晶包裹的枯草。', harvest: { item: 'fiber', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 12 },
+    { id: 'salt_rock', name: '盐石', desc: '坚硬的盐岩石块。', harvest: { item: 'stone', amount: 2 }, finite: true, stock: 4, harvestTime: 20 },
+    { id: 'dry_bone', name: '干枯骸骨', desc: '晒得发白的骸骨。', harvest: { item: 'bone', amount: 1 }, finite: true, stock: 2, harvestTime: 14 },
+  ],
+  '巨兽坟场': [
+    { id: 'giant_rib', name: '巨兽肋骨', desc: '比人还高的巨兽肋骨。', harvest: { item: 'bone', amount: 2 }, finite: true, stock: 3, harvestTime: 28 },
+    { id: 'marrow', name: '骨髓', desc: '骨腔中保存完好的骨髓。', harvest: { item: 'specimen', amount: 1 }, finite: true, stock: 2, harvestTime: 20 },
+    { id: 'rotten_flesh', name: '腐肉', desc: '尚未完全腐烂的兽肉。', harvest: { item: 'fungus', amount: 1 }, finite: true, stock: 2, harvestTime: 12 },
+    { id: 'bone_dust', name: '骨粉', desc: '风化碎裂的骨粉。', harvest: { item: 'stone', amount: 1 }, finite: true, stock: 3, harvestTime: 12 },
+  ],
+  // ===== 深部新区（围绕营地外环） =====
+  '孢子雨林': [
+    { id: 'spore_pouch', name: '发光孢子囊', desc: '雨林中发光的孢子囊，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'spore_wood', name: '孢子木', desc: '被菌丝包覆的朽木，坚硬可作建材。', harvest: { item: 'wood', amount: 2 }, stock: 3, restoreDays: 3, harvestTime: 20 },
+    { id: 'spore_vine', name: '菌丝藤', desc: '韧劲十足的菌丝藤，能提取纤维。', harvest: { item: 'fiber', amount: 2 }, stock: 2, restoreDays: 2, harvestTime: 14 },
+    { id: 'spore_specimen', name: '孢子样本', desc: '完整剥离的孢子体，值得研究。', harvest: { item: 'specimen', amount: 1 }, finite: true, stock: 3, harvestTime: 12 },
+    { id: 'spore_dust', name: '孢子粉尘', desc: '漫天飘散的孢子粉尘，蕴含生机知识。', research: { data: 6 }, stock: 2, restoreDays: 3, researchTime: 18 },
+  ],
+  '暗潮海岸': [
+    { id: 'sea_salt', name: '海盐结块', desc: '潮水蒸干后析出的海盐。', harvest: { item: 'brine', amount: 2 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'tide_shell', name: '潮汐贝', desc: '搁浅的潮汐贝，可作样本。', harvest: { item: 'specimen', amount: 1 }, finite: true, stock: 3, harvestTime: 10 },
+    { id: 'seaweed', name: '海藻束', desc: '缠成一团的海藻，能提取纤维。', harvest: { item: 'fiber', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 14 },
+    { id: 'coral_bone', name: '珊瑚骨', desc: '珊瑚礁的硬化骨架。', harvest: { item: 'bone', amount: 1 }, stock: 2, restoreDays: 3, harvestTime: 16 },
+    { id: 'tide_pool', name: '潮汐水洼', desc: '退潮后留下的小水洼。', harvest: { item: 'brine', amount: 1 }, stock: 2, restoreDays: 1, harvestTime: 10 },
+  ],
+  '风蚀峡谷': [
+    { id: 'wind_stone', name: '风蚀砂岩', desc: '被风磨圆的砂岩块。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 16 },
+    { id: 'canyon_leaf', name: '峡谷铁叶', desc: '峡谷壁上嵌着的金属叶片。', harvest: { item: 'metal', amount: 1 }, stock: 2, restoreDays: 3, harvestTime: 20 },
+    { id: 'dry_bed', name: '干涸河床', desc: '河床底部的细腻黏土。', harvest: { item: 'clay', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 18 },
+    { id: 'wind_crystal', name: '风聚结晶', desc: '狂风在岩缝中磨出的结晶。', research: { data: 6 }, stock: 2, restoreDays: 3, researchTime: 20 },
+  ],
+  '磁力高原': [
+    { id: 'magnet_ore', name: '磁铁矿', desc: '吸住铁器的黑色矿石。', harvest: { item: 'metal', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 18 },
+    { id: 'magnet_dust', name: '磁吸尘', desc: '磁力吸拢的金属尘屑。', harvest: { item: 'metal', amount: 1 }, stock: 2, restoreDays: 2, harvestTime: 12 },
+    { id: 'iron_crystal', name: '铁晶簇', desc: '磁铁矿中析出的铁晶，值得研究。', research: { data: 6 }, stock: 2, restoreDays: 4, researchTime: 22 },
+    { id: 'magnet_rock', name: '磁化岩', desc: '被磁力改造的岩块。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 3, harvestTime: 20 },
+  ],
+  '腐化泥沼': [
+    { id: 'bog_fungus', name: '腐沼菌', desc: '腐化泥沼中疯长的菌类，可以食用。', harvest: { item: 'fungus', amount: 1 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'venom_vine', name: '毒藤', desc: '浸满毒液的藤蔓，可提取毒液。', harvest: { item: 'venom', amount: 1 }, finite: true, stock: 3, harvestTime: 16 },
+    { id: 'corrupt_clay', name: '腐泥', desc: '发酵的腐化黏土。', harvest: { item: 'clay', amount: 1 }, stock: 3, restoreDays: 2, harvestTime: 16 },
+    { id: 'venom_sac_item', name: '毒囊', desc: '完整取下的毒囊，可作样本。', harvest: { item: 'specimen', amount: 1 }, finite: true, stock: 2, harvestTime: 12 },
+  ],
+  '星空高原': [
+    { id: 'star_ore', name: '陨铁块', desc: '坠落陨星中敲出的铁块。', harvest: { item: 'star_dust', amount: 1 }, finite: true, stock: 3, harvestTime: 22 },
+    { id: 'star_moss', name: '星辉苔', desc: '吸收星辉生长的苔藓，蕴含知识。', research: { data: 10 }, stock: 3, restoreDays: 2, researchTime: 18 },
+    { id: 'crater_water', name: '陨坑水', desc: '陨坑中积起的雨水。', harvest: { item: 'brine', amount: 1 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+    { id: 'star_wood', name: '坠落木', desc: '被陨星冲击折断的巨木。', harvest: { item: 'wood', amount: 2 }, finite: true, stock: 2, harvestTime: 18 },
+  ],
+  '熔岩深渊': [
+    { id: 'obsidian_block', name: '黑曜石块', desc: '熔岩冷却形成的黑色玻璃石。', harvest: { item: 'obsidian', amount: 1 }, finite: true, stock: 3, harvestTime: 24 },
+    { id: 'magma_crystal', name: '岩浆晶', desc: '岩浆中凝结的晶体矿。', harvest: { item: 'metal', amount: 2 }, stock: 3, restoreDays: 3, harvestTime: 20 },
+    { id: 'sulfur_block', name: '硫磺块', desc: '深渊中析出的硫磺块。', harvest: { item: 'stone', amount: 2 }, stock: 3, restoreDays: 2, harvestTime: 16 },
+    { id: 'lava_core', name: '熔岩髓', desc: '深渊之心，蕴含狂暴的知识。', research: { data: 10 }, finite: true, stock: 2, researchTime: 26 },
+  ],
+  '遗忘荒漠': [
+    { id: 'dune_crystal', name: '沙晶', desc: '沙海中埋藏的透明晶体。', research: { data: 8 }, stock: 3, restoreDays: 2, researchTime: 18 },
+    { id: 'dead_wood', name: '枯木', desc: '沙海边缘干死的枯木。', harvest: { item: 'wood', amount: 1 }, finite: true, stock: 3, harvestTime: 12 },
+    { id: 'fossil_rock', name: '风化石', desc: '风沙磨蚀的化石岩。', harvest: { item: 'stone', amount: 2 }, finite: true, stock: 3, harvestTime: 16 },
+    { id: 'oasis_water', name: '绿洲水洼', desc: '绿洲旁残存的水洼。', harvest: { item: 'brine', amount: 2 }, stock: 3, restoreDays: 1, harvestTime: 10 },
+  ],
+}
+
+// ===== 生态材料体系：每生态 1 种主要材料 + 1-3 种辅助材料，生物掉落对应生态材料，生态材料系各有专属配方 =====
+// main 主要材料（唯一生态特有）；aux 辅助材料（掉落池与配方共用，可为已有基础材料）；recipes 专属配方（每生态 4 个）
+G.ECO_SERIES = {
+  '营地平原': {
+    main: { id: 'plains_fiber', name: '菌毯纤维', desc: '营地下活菌毯剥下的柔韧纤维，兼具营养与韧性。', depName: '菌毯纤维丛', depDesc: '营地边缘疯长的菌毯纤维丛。' },
+    aux: ['fungus', 'metal', 'hide'],
+    recipes: [
+      { id: 'camp_bread', name: '营地面包', item: { name: '营地面包', desc: '掺入菌毯纤维的烤面包，管饱。', use: { hunger: 90 } }, in: { plains_fiber: 1, fungus: 2 }, out: { camp_bread: 1 }, desc: '1菌毯纤维+2菌丝块 → 1营地面包' },
+      { id: 'plains_padding', name: '营地步甲', item: { name: '营地步甲', desc: '菌毯纤维压成的轻甲，今日护甲。', use: { armor: 18 } }, in: { plains_fiber: 2, hide: 1 }, out: { plains_padding: 1 }, desc: '2菌毯纤维+1兽皮 → 1营地步甲' },
+      { id: 'plains_bandage', name: '菌毯绷带', item: { name: '菌毯绷带', desc: '自带抗菌孢子的绷带。', use: { bandage: 18 } }, in: { plains_fiber: 1, fungus: 1 }, out: { plains_bandage: 1 }, desc: '1菌毯纤维+1菌丝块 → 1菌毯绷带' },
+      { id: 'plains_spear', name: '营地矛', item: { name: '营地矛', desc: '菌毯纤维缠柄的猎矛。', use: { combat: 1 } }, in: { plains_fiber: 1, metal: 1 }, out: { plains_spear: 1 }, desc: '1菌毯纤维+1金属残片 → 1营地矛' },
+      { id: 'plains_med', name: '菌毯净药', item: { name: '菌毯净药', desc: '菌毯抗菌孢子提炼的净药，可治愈伤口感染。', use: { heal: 10 } }, in: { plains_fiber: 1, fungus: 1 }, out: { plains_med: 1 }, desc: '1菌毯纤维+1菌丝块 → 1菌毯净药' },
+    ],
+  },
+  '共生森林': {
+    main: { id: 'forest_heartwood', name: '共生木芯', desc: '巨树最内层的活木芯，温润坚韧，蕴含共生菌。', depName: '共生木芯桩', depDesc: '雷击后裸露的共生木芯。' },
+    aux: ['resin', 'fiber', 'hide'],
+    recipes: [
+      { id: 'heartwood_shield', name: '木芯盾', item: { name: '木芯盾', desc: '活木芯整木削成的圆盾，今日护甲。', use: { armor: 14 } }, in: { forest_heartwood: 1, fiber: 1 }, out: { heartwood_shield: 1 }, desc: '1共生木芯+1纤维 → 1木芯盾' },
+      { id: 'forest_bow', name: '森林猎弓', item: { name: '森林猎弓', desc: '共生木芯弯成的强弓。', use: { combat: 2 } }, in: { forest_heartwood: 1, hide: 1 }, out: { forest_bow: 1 }, desc: '1共生木芯+1兽皮 → 1森林猎弓' },
+      { id: 'bark_armor', name: '树皮甲', item: { name: '树皮甲', desc: '树脂粘合的树皮护甲，今日护甲。', use: { armor: 28 } }, in: { forest_heartwood: 1, resin: 1, hide: 1 }, out: { bark_armor: 1 }, desc: '1木芯+1树脂+1兽皮 → 1树皮甲' },
+      { id: 'symbiote_torch', name: '共生火炬', in: { forest_heartwood: 1, resin: 1 }, out: { torch: 1 }, desc: '1共生木芯+1树脂 → 1火把' },
+      { id: 'forest_balm', name: '共生菌膏', item: { name: '共生菌膏', desc: '木芯共生菌调配的药膏，可治愈伤口感染。', use: { heal: 12 } }, in: { forest_heartwood: 1, resin: 1 }, out: { forest_balm: 1 }, desc: '1共生木芯+1树脂 → 1共生菌膏' },
+    ],
+  },
+  '甲烷湖泽': {
+    main: { id: 'lake_ore', name: '湖沼泥矿', desc: '湖底沉积的泥铁矿，烧制后异常坚固。', depName: '湖沼泥矿层', depDesc: '退水后露出的湖沼泥矿层。' },
+    aux: ['clay', 'stone', 'specimen'],
+    recipes: [
+      { id: 'lake_brick', name: '湖沼砖', in: { lake_ore: 1, clay: 1 }, out: { brick: 1 }, desc: '1湖沼泥矿+1黏土 → 1泥砖' },
+      { id: 'gas_lamp', name: '沼气提灯', in: { lake_ore: 1, stone: 1 }, out: { lamp: 1 }, desc: '1湖沼泥矿+1燧石 → 1提灯' },
+      { id: 'lake_poultice', name: '湖泥敷剂', in: { lake_ore: 1, specimen: 1 }, out: { herb_poultice: 1 }, desc: '1湖沼泥矿+1样本 → 1草药敷剂' },
+      { id: 'lake_spear', name: '湖沼矛', item: { name: '湖沼矛', desc: '泥矿矛尖的沉重长矛。', use: { combat: 2 } }, in: { lake_ore: 2, stone: 1 }, out: { lake_spear: 1 }, desc: '2湖沼泥矿+1燧石 → 1湖沼矛' },
+      { id: 'lake_antidote', name: '湖泥解毒剂', item: { name: '湖泥解毒剂', desc: '湖底淤泥吸附毒素炼成的解毒剂，可治愈体内中毒。', use: { heal: 10 } }, in: { lake_ore: 1, clay: 1 }, out: { lake_antidote: 1 }, desc: '1湖沼泥矿+1黏土 → 1湖泥解毒剂' },
+    ],
+  },
+  '远古遗迹': {
+    main: { id: 'relic_tablet', name: '遗迹铭文石', desc: '刻满未知铭文的石板，每一块都封存着远古知识。', depName: '铭文石柱', depDesc: '半埋在土中的遗迹铭文石柱。' },
+    aux: ['metal', 'stone'],
+    recipes: [
+      { id: 'relic_sword', name: '遗迹古剑', item: { name: '遗迹古剑', desc: '铭文石刃的古剑，削铁如泥。', use: { combat: 3 } }, in: { relic_tablet: 1, metal: 1 }, out: { relic_sword: 1 }, desc: '1铭文石+1金属残片 → 1遗迹古剑' },
+      { id: 'relic_amulet', name: '铭文护符', item: { name: '铭文护符', desc: '解读铭文后制作的护符，启迪心智。', use: { data: 5, morale: 10 } }, in: { relic_tablet: 1, metal: 1 }, out: { relic_amulet: 1 }, desc: '1铭文石+1金属残片 → 1铭文护符' },
+      { id: 'relic_notes', name: '古迹拓本', item: { name: '古迹拓本', desc: '拓印整理的古迹文献。', use: { data: 4 } }, in: { relic_tablet: 1 }, out: { relic_notes: 1 }, desc: '1铭文石 → 1古迹拓本' },
+      { id: 'relic_hammer', name: '遗迹石锤', in: { relic_tablet: 2, stone: 1 }, out: { stone_axe: 1 }, desc: '2铭文石+1燧石 → 1石斧' },
+      { id: 'relic_salve', name: '铭文净化膏', item: { name: '铭文净化膏', desc: '铭文之力加持的净化药膏，可治愈体内中毒。', use: { heal: 12 } }, in: { relic_tablet: 1, metal: 1 }, out: { relic_salve: 1 }, desc: '1铭文石+1金属残片 → 1铭文净化膏' },
+    ],
+  },
+  '幽深洞窟': {
+    main: { id: 'cave_crystal', name: '洞穴晶簇', desc: '洞壁渗水析出的磷光晶簇，能折射光线与记忆。', depName: '洞壁晶簇', depDesc: '洞壁上垂下的磷光晶簇。' },
+    aux: ['metal', 'gem', 'stone'],
+    recipes: [
+      { id: 'crystal_lamp', name: '晶簇提灯', in: { cave_crystal: 1, metal: 1 }, out: { lamp: 1 }, desc: '1晶簇+1金属残片 → 1提灯' },
+      { id: 'crystal_dagger', name: '晶簇匕首', item: { name: '晶簇匕首', desc: '晶簇打磨成的锋利匕首。', use: { combat: 2 } }, in: { cave_crystal: 1, stone: 1 }, out: { crystal_dagger: 1 }, desc: '1晶簇+1燧石 → 1晶簇匕首' },
+      { id: 'crystal_tonic', name: '晶光药剂', in: { cave_crystal: 1, gem: 1 }, out: { elixir: 1 }, desc: '1晶簇+1宝石 → 1生命药剂' },
+      { id: 'cave_drill', name: '洞窟钻头', in: { cave_crystal: 2, metal: 1 }, out: { tool_kit: 1 }, desc: '2晶簇+1金属残片 → 1工具包' },
+      { id: 'cave_powder', name: '晶簇解毒粉', item: { name: '晶簇解毒粉', desc: '洞壁矿晶碾成的解毒粉末，可治愈体内中毒。', use: { heal: 10 } }, in: { cave_crystal: 1, metal: 1 }, out: { cave_powder: 1 }, desc: '1晶簇+1金属残片 → 1晶簇解毒粉' },
+    ],
+  },
+  '地热裂谷': {
+    main: { id: 'geo_sulfur', name: '地热硫晶', desc: '热泉边析出的硫磺结晶，遇火即燃，也是上等药剂原料。', depName: '硫晶矿脉', depDesc: '热泉蒸汽中裸露的硫晶矿脉。' },
+    aux: ['stone', 'resin'],
+    recipes: [
+      { id: 'sulfur_bomb', name: '硫磺火弹', item: { name: '硫磺火弹', desc: '点燃后轰然炸开的硫磺弹。', use: { combat: 3 } }, in: { geo_sulfur: 1, resin: 1 }, out: { sulfur_bomb: 1 }, desc: '1硫晶+1树脂 → 1硫磺火弹' },
+      { id: 'geo_cookpot', name: '地热炖锅', in: { geo_sulfur: 1, stone: 2 }, out: { stew: 1 }, desc: '1硫晶+2燧石 → 1猎人炖汤' },
+      { id: 'sulfur_salve', name: '硫磺药膏', in: { geo_sulfur: 1, resin: 1 }, out: { salve: 1 }, desc: '1硫晶+1树脂 → 1治疗药膏' },
+      { id: 'geo_warmstone', name: '暖手石', in: { geo_sulfur: 1, stone: 1 }, out: { torch: 1 }, desc: '1硫晶+1燧石 → 1火把' },
+      { id: 'geo_heat', name: '硫磺热剂', item: { name: '硫磺热剂', desc: '硫磺灼热调配的热剂，可治愈冻伤。', use: { heal: 12 } }, in: { geo_sulfur: 1, stone: 1 }, out: { geo_heat: 1 }, desc: '1硫晶+1燧石 → 1硫磺热剂' },
+    ],
+  },
+  '地脉核心': {
+    main: { id: 'vein_core', name: '脉动核心', desc: '地脉核心脱落的脉动结块，心脏般缓慢搏动。', depName: '脉动矿心', depDesc: '地脉深处跳动的脉动矿心。' },
+    aux: ['metal', 'fungus'],
+    recipes: [
+      { id: 'vein_engine', name: '脉动引擎', in: { vein_core: 1, ingot: 1 }, out: { tool_kit: 1 }, desc: '1脉动核心+1金属锭 → 1工具包' },
+      { id: 'vein_armor', name: '脉动甲', item: { name: '脉动甲', desc: '脉动核心编织的重甲，今日护甲。', use: { armor: 35 } }, in: { vein_core: 2, ingot: 1 }, out: { vein_armor: 1 }, desc: '2脉动核心+1金属锭 → 1脉动甲' },
+      { id: 'vein_sensor', name: '地脉传感器', item: { name: '地脉传感器', desc: '倾听地脉脉搏的仪器。', use: { data: 6 } }, in: { vein_core: 1, fungus: 2 }, out: { vein_sensor: 1 }, desc: '1脉动核心+2菌丝块 → 1地脉传感器' },
+      { id: 'vein_cell', name: '脉动电池', in: { vein_core: 1, ingot: 1 }, out: { lamp: 1 }, desc: '1脉动核心+1金属锭 → 1提灯' },
+      { id: 'vein_purify', name: '脉动净化液', item: { name: '脉动净化液', desc: '脉动能量震荡净化的药液，可治愈体内中毒。', use: { heal: 14 } }, in: { vein_core: 1, metal: 1 }, out: { vein_purify: 1 }, desc: '1脉动核心+1金属残片 → 1脉动净化液' },
+    ],
+  },
+  '极高山脉': {
+    main: { id: 'alpine_ice', name: '高山冰晶', desc: '冰壁深处千年凝结的纯净冰晶，寒气逼人。', depName: '冰晶矿壁', depDesc: '冰壁深处剔透的高山冰晶。' },
+    aux: ['wood', 'bone'],
+    recipes: [
+      { id: 'ice_arrow', name: '冰晶箭', item: { name: '冰晶箭', desc: '冰晶箭头的猎箭，冰冷刺骨。', use: { combat: 2 } }, in: { alpine_ice: 1, wood: 1 }, out: { ice_arrow: 1 }, desc: '1冰晶+1木材 → 1冰晶箭' },
+      { id: 'alpine_coat', name: '雪地大衣', in: { alpine_ice: 1, wood: 1, bone: 1 }, out: { leather_armor: 1 }, desc: '1冰晶+1木材+1骸骨 → 1皮甲' },
+      { id: 'ice_water', name: '冰晶净水', item: { name: '冰晶净水', desc: '冰晶融化的纯净水。', use: { thirst: 90 } }, in: { alpine_ice: 1, wood: 1 }, out: { ice_water: 1 }, desc: '1冰晶+1木材 → 1冰晶净水' },
+      { id: 'ice_blade', name: '冰晶矛', in: { alpine_ice: 2, bone: 1 }, out: { bone_spear: 1 }, desc: '2冰晶+1骸骨 → 1骨矛' },
+      { id: 'alpine_balm', name: '雪山护冻膏', item: { name: '雪山护冻膏', desc: '冰晶寒力与兽油调和的护冻膏，可治愈冻伤。', use: { heal: 12 } }, in: { alpine_ice: 1, wood: 1 }, out: { alpine_balm: 1 }, desc: '1冰晶+1木材 → 1雪山护冻膏' },
+    ],
+  },
+  '冰封冻野': {
+    main: { id: 'tundra_wood', name: '冻原硬木', desc: '永冻荒原上千年不腐的冻木，坚硬如铁。', depName: '冻原枯木', depDesc: '冻原上挺立的千年枯木。' },
+    aux: ['bone', 'hide'],
+    recipes: [
+      { id: 'tundra_spear', name: '冻原矛', item: { name: '冻原矛', desc: '冻木削尖的长矛。', use: { combat: 2 } }, in: { tundra_wood: 1, bone: 1 }, out: { tundra_spear: 1 }, desc: '1冻原硬木+1骸骨 → 1冻原矛' },
+      { id: 'tundra_coat', name: '兽皮大衣', item: { name: '兽皮大衣', desc: '厚实暖和的兽皮大衣，今日护甲。', use: { armor: 22 } }, in: { tundra_wood: 1, hide: 2 }, out: { tundra_coat: 1 }, desc: '1冻原硬木+2兽皮 → 1兽皮大衣' },
+      { id: 'tundra_ration', name: '冻干粮', in: { tundra_wood: 1 }, out: { mushmeal: 1 }, desc: '1冻原硬木 → 1菌粮团' },
+      { id: 'ice_trap', name: '冰封陷阱', in: { tundra_wood: 1, bone: 1 }, out: { bone_knife: 1 }, desc: '1冻原硬木+1骸骨 → 1骨刀' },
+      { id: 'tundra_warm', name: '冻原温敷', item: { name: '冻原温敷', desc: '冻木温煨的暖敷布，可治愈冻伤。', use: { heal: 12 } }, in: { tundra_wood: 1, bone: 1 }, out: { tundra_warm: 1 }, desc: '1冻原硬木+1骸骨 → 1冻原温敷' },
+    ],
+  },
+  '盐晶荒原': {
+    main: { id: 'salt_block', name: '盐晶块', desc: '盐原结晶的整块盐晶，可析盐、可打磨成器。', depName: '盐晶矿坑', depDesc: '盐原上晶光闪烁的盐晶矿坑。' },
+    aux: ['stone', 'fiber'],
+    recipes: [
+      { id: 'salt_blade', name: '盐晶刀', in: { salt_block: 1, stone: 1 }, out: { flint_dagger: 1 }, desc: '1盐晶块+1燧石 → 1燧石匕首' },
+      { id: 'salt_lamp', name: '盐晶灯', in: { salt_block: 1, fiber: 1 }, out: { lamp: 1 }, desc: '1盐晶块+1纤维 → 1提灯' },
+      { id: 'salt_ration', name: '盐渍粮', in: { salt_block: 1, fiber: 1 }, out: { jerky: 1 }, desc: '1盐晶块+1纤维 → 1盐渍干粮' },
+      { id: 'salt_plate', name: '盐晶甲', item: { name: '盐晶甲', desc: '盐晶板穿成的护甲，今日护甲。', use: { armor: 26 } }, in: { salt_block: 2, stone: 1 }, out: { salt_plate: 1 }, desc: '2盐晶块+1燧石 → 1盐晶甲' },
+      { id: 'salt_drink', name: '盐晶电解质', item: { name: '盐晶电解质', desc: '盐晶溶解调配的电解质饮，可治愈中暑。', use: { thirst: 30, morale: 5 } }, in: { salt_block: 1, stone: 1 }, out: { salt_drink: 1 }, desc: '1盐晶块+1燧石 → 1盐晶电解质' },
+    ],
+  },
+  '巨兽坟场': {
+    main: { id: 'giant_bone', name: '巨兽骨', desc: '远古巨兽的整段肋骨，比人还高，坚硬如铁。', depName: '巨兽骸骨', depDesc: '坟场中央隆起的巨兽骸骨。' },
+    aux: ['bone', 'specimen', 'stone'],
+    recipes: [
+      { id: 'giant_bone_armor', name: '巨骨甲', item: { name: '巨骨甲', desc: '巨兽骨板编成的重甲，今日护甲。', use: { armor: 42 } }, in: { giant_bone: 2, bone: 1 }, out: { giant_bone_armor: 1 }, desc: '2巨兽骨+1骸骨 → 1巨骨甲' },
+      { id: 'bone_king_sword', name: '骨王剑', item: { name: '骨王剑', desc: '以骸骨君王脊骨打磨的巨剑。', use: { combat: 3 } }, in: { giant_bone: 1, bone: 1, stone: 1 }, out: { bone_king_sword: 1 }, desc: '1巨兽骨+1骸骨+1燧石 → 1骨王剑' },
+      { id: 'bone_powder', name: '骨粉药剂', in: { giant_bone: 1, specimen: 1 }, out: { great_elixir: 1 }, desc: '1巨兽骨+1样本 → 1大生命药剂' },
+      { id: 'giant_bone_spear', name: '巨骨矛', item: { name: '巨骨矛', desc: '整根巨骨削成的恐怖长矛。', use: { combat: 3 } }, in: { giant_bone: 1, bone: 1 }, out: { giant_bone_spear: 1 }, desc: '1巨兽骨+1骸骨 → 1巨骨矛' },
+      { id: 'bone_dressing', name: '骨粉敷料', item: { name: '骨粉敷料', desc: '巨骨研磨的愈合敷料，可治愈伤口感染。', use: { heal: 14 } }, in: { giant_bone: 1, bone: 1 }, out: { bone_dressing: 1 }, desc: '1巨兽骨+1骸骨 → 1骨粉敷料' },
+    ],
+  },
+  '孢子雨林': {
+    main: { id: 'spore_nucleus', name: '孢子菌核', desc: '菌林核心处凝结的菌核，蕴藏整片雨林的生机记忆。', depName: '菌核丛', depDesc: '雨林深处鼓动的孢子菌核丛。' },
+    aux: ['fiber', 'fungus', 'specimen'],
+    recipes: [
+      { id: 'spore_charm', name: '菌核护符', item: { name: '菌核护符', desc: '菌核打磨的护符，回响着生机。', use: { data: 4, morale: 10 } }, in: { spore_nucleus: 1, fiber: 1 }, out: { spore_charm: 1 }, desc: '1菌核+1纤维 → 1菌核护符' },
+      { id: 'spore_smoke', name: '孢子迷雾弹', item: { name: '孢子迷雾弹', desc: '炸开能释放致幻孢子的弹药。', use: { combat: 2 } }, in: { spore_nucleus: 1, fungus: 1 }, out: { spore_smoke: 1 }, desc: '1菌核+1菌丝块 → 1孢子迷雾弹' },
+      { id: 'spore_rope', name: '菌丝绳索', in: { spore_nucleus: 1, fiber: 2 }, out: { tent: 1 }, desc: '1菌核+2纤维 → 1简易帐篷' },
+      { id: 'nucleus_bread', name: '菌核面包', in: { spore_nucleus: 1, fungus: 2 }, out: { spore_bread: 1 }, desc: '1菌核+2菌丝块 → 1孢子面包' },
+      { id: 'spore_cure', name: '菌林除孢素', item: { name: '菌林除孢素', desc: '菌核精华提炼的除孢素，可治愈孢子感染。', use: { heal: 12 } }, in: { spore_nucleus: 1, fiber: 1 }, out: { spore_cure: 1 }, desc: '1菌核+1纤维 → 1菌林除孢素' },
+    ],
+  },
+  '暗潮海岸': {
+    main: { id: 'tide_coral', name: '潮汐珊瑚', desc: '礁盘上采下的潮汐珊瑚，坚硬多孔，能滤水。', depName: '珊瑚礁盘', depDesc: '退潮后露出的珊瑚礁盘。' },
+    aux: ['brine', 'fiber', 'bone'],
+    recipes: [
+      { id: 'coral_armor', name: '珊瑚护甲', item: { name: '珊瑚护甲', desc: '珊瑚板穿编的护甲，今日护甲。', use: { armor: 30 } }, in: { tide_coral: 2, bone: 1 }, out: { coral_armor: 1 }, desc: '2潮汐珊瑚+1骸骨 → 1珊瑚护甲' },
+      { id: 'coral_water', name: '珊瑚净水', in: { tide_coral: 1, brine: 1 }, out: { tide_water: 1 }, desc: '1潮汐珊瑚+1盐水 → 1潮汐净水' },
+      { id: 'coral_beads', name: '珊瑚珠', item: { name: '珊瑚珠', desc: '珊瑚磨成的珠串，凝神静气。', use: { data: 3, morale: 8 } }, in: { tide_coral: 1, fiber: 1 }, out: { coral_beads: 1 }, desc: '1潮汐珊瑚+1纤维 → 1珊瑚珠' },
+      { id: 'tide_bow', name: '海潮弓', item: { name: '海潮弓', desc: '珊瑚弓臂、兽骨弓弦的强弓。', use: { combat: 3 } }, in: { tide_coral: 1, fiber: 1, bone: 1 }, out: { tide_bow: 1 }, desc: '1珊瑚+1纤维+1骸骨 → 1海潮弓' },
+      { id: 'tide_cool', name: '潮汐冷萃', item: { name: '潮汐冷萃', desc: '潮水冷萃的清凉剂，可治愈中暑。', use: { thirst: 30, morale: 5 } }, in: { tide_coral: 1, brine: 1 }, out: { tide_cool: 1 }, desc: '1潮汐珊瑚+1盐水 → 1潮汐冷萃' },
+    ],
+  },
+  '风蚀峡谷': {
+    main: { id: 'wind_sand_core', name: '风蚀砂岩核', desc: '被狂风打磨百万年的砂岩核，密度极高。', depName: '风蚀岩核', depDesc: '谷壁上裸露的风蚀砂岩核。' },
+    aux: ['clay', 'metal', 'stone'],
+    recipes: [
+      { id: 'wind_dart', name: '风刃飞刀', item: { name: '风刃飞刀', desc: '砂岩核磨成的锋利飞刀。', use: { combat: 2 } }, in: { wind_sand_core: 1, metal: 1 }, out: { wind_dart: 1 }, desc: '1砂岩核+1金属残片 → 1风刃飞刀' },
+      { id: 'sand_stove', name: '砂岩炉', item: { name: '砂岩炉', desc: '厚重的砂岩炉，火光温暖人心。', use: { morale: 15 } }, in: { wind_sand_core: 1, clay: 1, stone: 1 }, out: { sand_stove: 1 }, desc: '1砂岩核+1黏土+1燧石 → 1砂岩炉' },
+      { id: 'climbing_claw', name: '攀岩爪', in: { wind_sand_core: 1, metal: 1 }, out: { tool_kit: 1 }, desc: '1砂岩核+1金属残片 → 1工具包' },
+      { id: 'wind_arrow', name: '风蚀箭', item: { name: '风蚀箭', desc: '砂岩箭头磨得无比锋利。', use: { combat: 2 } }, in: { wind_sand_core: 1, stone: 1, clay: 1 }, out: { wind_arrow: 1 }, desc: '1砂岩核+1燧石+1黏土 → 1风蚀箭' },
+      { id: 'wind_balm', name: '风蚀凉膏', item: { name: '风蚀凉膏', desc: '岩缝凉苔调配的凉膏，可治愈中暑。', use: { thirst: 20, heal: 10 } }, in: { wind_sand_core: 1, clay: 1 }, out: { wind_balm: 1 }, desc: '1砂岩核+1黏土 → 1风蚀凉膏' },
+    ],
+  },
+  '磁力高原': {
+    main: { id: 'magnet_iron', name: '磁晶铁', desc: '磁力高原富集的磁晶铁矿石，能吸起铁器。', depName: '磁铁矿脉', depDesc: '高原上裸露的黑色磁铁矿脉。' },
+    aux: ['metal', 'stone'],
+    recipes: [
+      { id: 'magnet_compass', name: '磁力罗盘', in: { magnet_iron: 1, metal: 1 }, out: { map: 1 }, desc: '1磁晶铁+1金属残片 → 1简易地图' },
+      { id: 'magnet_arrow', name: '磁爆箭', item: { name: '磁爆箭', desc: '磁铁箭头，命中带磁爆。', use: { combat: 3 } }, in: { magnet_iron: 1, stone: 1 }, out: { magnet_arrow: 1 }, desc: '1磁晶铁+1燧石 → 1磁爆箭' },
+      { id: 'magnet_boot', name: '磁力靴', in: { magnet_iron: 2, metal: 1 }, out: { magnet_boots: 1 }, desc: '2磁晶铁+1金属残片 → 1磁力靴' },
+      { id: 'magnet_plate', name: '磁石护甲', item: { name: '磁石护甲', desc: '磁铁片吸合成的护甲，今日护甲。', use: { armor: 32 } }, in: { magnet_iron: 2, metal: 1 }, out: { magnet_plate: 1 }, desc: '2磁晶铁+1金属残片 → 1磁石护甲' },
+      { id: 'magnet_pill', name: '磁晶净化丸', item: { name: '磁晶净化丸', desc: '磁力吸附毒素的净化丸，可治愈体内中毒。', use: { heal: 12 } }, in: { magnet_iron: 1, metal: 1 }, out: { magnet_pill: 1 }, desc: '1磁晶铁+1金属残片 → 1磁晶净化丸' },
+    ],
+  },
+  '腐化泥沼': {
+    main: { id: 'bog_venom_crystal', name: '腐沼毒晶', desc: '腐沼深处凝结的剧毒结晶，剧毒无比。', depName: '毒晶沉淀', depDesc: '腐沼底部析出的毒晶沉淀。' },
+    aux: ['venom', 'clay', 'specimen'],
+    recipes: [
+      { id: 'bog_venom_blade', name: '腐沼毒刃', item: { name: '腐沼毒刃', desc: '毒晶淬刃的短刀，见血封喉。', use: { combat: 3 } }, in: { bog_venom_crystal: 1, venom: 1 }, out: { bog_venom_blade: 1 }, desc: '1毒晶+1毒液 → 1腐沼毒刃' },
+      { id: 'bog_detox', name: '强力解毒剂', in: { bog_venom_crystal: 1, specimen: 1 }, out: { detox: 1 }, desc: '1毒晶+1样本 → 1强力解毒剂' },
+      { id: 'venom_smoke', name: '毒雾弹', item: { name: '毒雾弹', desc: '炸开能释放剧毒迷雾的弹药。', use: { combat: 2 } }, in: { bog_venom_crystal: 1, clay: 1 }, out: { venom_smoke: 1 }, desc: '1毒晶+1黏土 → 1毒雾弹' },
+      { id: 'bog_armor', name: '腐泥护甲', item: { name: '腐泥护甲', desc: '腐泥烧制的厚甲，今日护甲。', use: { armor: 28 } }, in: { bog_venom_crystal: 1, clay: 2 }, out: { bog_armor: 1 }, desc: '1毒晶+2黏土 → 1腐泥护甲' },
+      { id: 'bog_cure', name: '腐沼驱孢剂', item: { name: '腐沼驱孢剂', desc: '毒晶以毒攻毒炼成的驱孢剂，可治愈孢子感染。', use: { heal: 12 } }, in: { bog_venom_crystal: 1, venom: 1 }, out: { bog_cure: 1 }, desc: '1毒晶+1毒液 → 1腐沼驱孢剂' },
+    ],
+  },
+  '星空高原': {
+    main: { id: 'star_iron', name: '星尘铁', desc: '陨星核心剥出的星尘铁，泛着幽蓝星辉。', depName: '陨铁残骸', depDesc: '高原陨坑中半埋的陨铁残骸。' },
+    aux: ['star_dust', 'gem', 'metal'],
+    recipes: [
+      { id: 'star_iron_sword', name: '星辉剑', in: { star_iron: 1, star_dust: 1 }, out: { star_sword: 1 }, desc: '1星尘铁+1星尘 → 1星辉剑' },
+      { id: 'star_armor', name: '星尘护甲', item: { name: '星尘护甲', desc: '星尘铁锻造的护甲，今日护甲。', use: { armor: 45 } }, in: { star_iron: 2, metal: 1 }, out: { star_armor: 1 }, desc: '2星尘铁+1金属残片 → 1星尘护甲' },
+      { id: 'star_compass', name: '星空罗盘', item: { name: '星空罗盘', desc: '指针恒定指向星空的罗盘。', use: { scout: 12 } }, in: { star_iron: 1, gem: 1 }, out: { star_compass: 1 }, desc: '1星尘铁+1宝石 → 1星空罗盘' },
+      { id: 'star_elixir', name: '星辉药剂', in: { star_iron: 1, gem: 1 }, out: { great_elixir: 1 }, desc: '1星尘铁+1宝石 → 1大生命药剂' },
+      { id: 'star_purify', name: '星辉净化水', item: { name: '星辉净化水', desc: '星辉涤荡的净化之水，可治愈孢子感染。', use: { heal: 15 } }, in: { star_iron: 1, star_dust: 1 }, out: { star_purify: 1 }, desc: '1星尘铁+1星尘 → 1星辉净化水' },
+    ],
+  },
+  '熔岩深渊': {
+    main: { id: 'obsidian', name: '黑曜石', desc: '熔岩冷却成的黑色玻璃质岩石，坚不可摧。', depName: '黑曜石柱', depDesc: '熔岩河畔矗立的黑曜石柱。' },
+    aux: ['stone', 'metal'],
+    recipes: [
+      { id: 'obsidian_knife', name: '黑曜石刃', in: { obsidian: 1, stone: 1 }, out: { obsidian_blade: 1 }, desc: '1黑曜石+1燧石 → 1黑曜石刃' },
+      { id: 'lava_armor', name: '熔岩护甲', item: { name: '熔岩护甲', desc: '黑曜石鳞片编成的重甲，今日护甲。', use: { armor: 40 } }, in: { obsidian: 2, metal: 1 }, out: { lava_armor: 1 }, desc: '2黑曜石+1金属残片 → 1熔岩护甲' },
+      { id: 'obsidian_spear', name: '黑曜石矛', item: { name: '黑曜石矛', desc: '黑曜石矛尖寒光凛冽。', use: { combat: 3 } }, in: { obsidian: 1, stone: 1, metal: 1 }, out: { obsidian_spear: 1 }, desc: '1黑曜石+1燧石+1金属残片 → 1黑曜石矛' },
+      { id: 'magma_fuel', name: '岩浆燃料', in: { obsidian: 1, stone: 1 }, out: { torch: 1 }, desc: '1黑曜石+1燧石 → 1火把' },
+      { id: 'lava_warm', name: '熔岩暖石', item: { name: '熔岩暖石', desc: '黑曜石保温的暖石，可治愈冻伤。', use: { heal: 15 } }, in: { obsidian: 1, stone: 1 }, out: { lava_warm: 1 }, desc: '1黑曜石+1燧石 → 1熔岩暖石' },
+    ],
+  },
+  '遗忘荒漠': {
+    main: { id: 'desert_sand_crystal', name: '沙晶石', desc: '沙海深处凝结的透明沙晶石，纯净通透。', depName: '沙晶矿脉', depDesc: '沙丘下埋藏的沙晶矿脉。' },
+    aux: ['wood', 'stone', 'specimen'],
+    recipes: [
+      { id: 'sand_mirror', name: '沙晶镜', item: { name: '沙晶镜', desc: '沙晶磨成的透镜，能远眺远方。', use: { scout: 8 } }, in: { desert_sand_crystal: 1, stone: 1 }, out: { sand_mirror: 1 }, desc: '1沙晶+1燧石 → 1沙晶镜' },
+      { id: 'sand_arrow', name: '沙暴箭', item: { name: '沙暴箭', desc: '沙晶箭头的猎箭。', use: { combat: 2 } }, in: { desert_sand_crystal: 1, wood: 1 }, out: { sand_arrow: 1 }, desc: '1沙晶+1木材 → 1沙暴箭' },
+      { id: 'oasis_filter', name: '绿洲滤水器', in: { desert_sand_crystal: 1, stone: 1, specimen: 1 }, out: { water_skin: 1 }, desc: '1沙晶+1燧石+1样本 → 1水囊' },
+      { id: 'sand_amulet', name: '沙晶护符', in: { desert_sand_crystal: 1, specimen: 1 }, out: { bone_ring: 1 }, desc: '1沙晶+1样本 → 1骨戒' },
+      { id: 'desert_dew', name: '荒漠夜露', item: { name: '荒漠夜露', desc: '沙漠夜晚凝结的清凉夜露，可治愈中暑。', use: { thirst: 30, heal: 10 } }, in: { desert_sand_crystal: 1, wood: 1 }, out: { desert_dew: 1 }, desc: '1沙晶+1木材 → 1荒漠夜露' },
+    ],
+  },
+};

@@ -1,0 +1,20 @@
+{
+  "name": "异星生存 · Alien Survival",
+  "short_name": "异星生存",
+  "description": "异星生存：在活物星球上生存、探索、战斗、移植器官、建设基地的生存策略游戏",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#1a2027",
+  "theme_color": "#20303c",
+  "icons": [
+    {
+      "src": "assets/pwa/icon-256.png",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

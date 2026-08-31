@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>异星生存 · Alien Survival</title>
+    <link rel="stylesheet" href="src/assets/main.css" />
+    <!-- PWA：手机添加主屏幕 / 离线运行 -->
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#20303c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="异星生存" />
+    <link rel="apple-touch-icon" href="assets/pwa/icon-256.png" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Vue 3（本地全局版，离线可运行） -->
+    <script src="lib/vue.global.prod.js"></script>
+
+    <!-- 游戏核心逻辑：数据注册器 → 数据模块（按依赖顺序）→ 装配器 → 逻辑 -->
+    <script src="src/game/sound.js"></script>
+    <script src="src/game/data-def/registry.js"></script>
+    <script src="src/game/data-def/core.js"></script>
+    <script src="src/game/data-def/tribes.js"></script>
+    <script src="src/game/data-def/organs.js"></script>
+    <script src="src/game/data-def/cards.js"></script>
+    <script src="src/game/data-def/items.js"></script>
+    <script src="src/game/data-def/recipes.js"></script>
+    <script src="src/game/data-def/locations.js"></script>
+    <script src="src/game/data-def/lore.js"></script>
+    <script src="src/game/data-def/choices.js"></script>
+    <script src="src/game/data-def/research.js"></script>
+    <script src="src/game/data-def/eco.js"></script>
+    <script src="src/game/data-def/characters.js"></script>
+    <script src="src/game/data.js"></script>
+    <script src="src/game/store.js"></script>
+    <script src="src/game/battle.js"></script>
+
+    <!-- UI 组件 -->
+    <script src="src/components/StatusBar.js"></script>
+    <script src="src/components/LocationPanel.js"></script>
+    <script src="src/components/RoadsPanel.js"></script>
+    <script src="src/components/InfoPanel.js"></script>
+    <script src="src/components/LogPanel.js"></script>
+    <script src="src/components/TutorialPanel.js"></script>
+    <script src="src/components/QuestPanel.js"></script>
+    <script src="src/components/BattlePanel.js"></script>
+    <script src="src/components/ActionBar.js"></script>
+    <script src="src/components/MainMenuPanel.js"></script>
+    <script src="src/components/CharacterSelectPanel.js"></script>
+    <script src="src/components/MapModal.js"></script>
+    <script src="src/components/ConsumeModal.js"></script>
+    <script src="src/components/ResearchModal.js"></script>
+    <script src="src/components/CraftModal.js"></script>
+    <script src="src/components/AbilityModal.js"></script>
+    <script src="src/components/BodyModal.js"></script>
+    <script src="src/components/DeckModal.js"></script>
+    <script src="src/components/BuildingModal.js"></script>
+    <script src="src/components/CardIndexModal.js"></script>
+    <script src="src/components/OrganCardIndexModal.js"></script>
+    <script src="src/components/ResourceModal.js"></script>
+    <script src="src/components/ItemsModal.js"></script>
+    <script src="src/components/BestiaryModal.js"></script>
+    <script src="src/components/LoreModal.js"></script>
+    <script src="src/components/DiseaseModal.js"></script>
+    <script src="src/components/ChoiceModal.js"></script>
+    <script src="src/components/EventNotice.js"></script>
+
+    <!-- 入口 -->
+    <script src="src/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+/* 数据模块：recipes —— 基础配方定义
+ * 配方经 G.def.recipes() 工厂注册：自动规范化 desc/cat，req 字段自动写入 G.RECIPE_REQ
+ * 扩展方式：任意文件调用 G.def.recipes([...]) 追加即可叠加新配方
+ */
+var G = window.GAME.data || (window.GAME.data = {})
+G.def.recipes([
+  // 食物与水（req: cook 烹饪工艺）
+  { id: 'purify', name: '净化盐水', in: { brine: 2 }, out: { pure_water: 1 }, desc: '2盐水 → 1净水' },
+  { id: 'fungus_juice', name: '榨菌露汁', in: { fungus: 2 }, out: { fungus_juice: 1 }, desc: '2菌丝块 → 1菌露汁' },
+  { id: 'water_skin', name: '缝制水囊', in: { hide: 2, resin: 1 }, out: { water_skin: 1 }, desc: '2兽皮+1树脂 → 1水囊' },
+  { id: 'mushmeal', name: '菌粮团', in: { fungus: 2 }, out: { mushmeal: 1 }, desc: '2菌丝块 → 1菌粮团' },
+  { id: 'bread', name: '烤菌麦饼', in: { fungus: 3 }, out: { bread: 1 }, desc: '3菌丝块 → 1菌麦饼' },
+  { id: 'stew', name: '猎人炖汤', in: { fungus: 2, hide: 1 }, out: { stew: 1 }, desc: '2菌丝+1兽皮 → 1炖汤', req: 'cook' },
+  { id: 'jerky', name: '盐渍干粮', in: { brine: 1, specimen: 1 }, out: { jerky: 1 }, desc: '1盐水+1样本 → 1干粮', req: 'cook' },
+  { id: 'honey', name: '蜜菌蜜', in: { resin: 1, specimen: 1 }, out: { honey: 1 }, desc: '1树脂+1样本 → 1菌蜜', req: 'cook' },
+  { id: 'soup', name: '浓肉汤', in: { brine: 2, specimen: 1 }, out: { soup: 1 }, desc: '2盐水+1样本 → 1浓汤', req: 'cook' },
+  { id: 'feast', name: '盛宴', in: { stew: 1, jerky: 1 }, out: { feast: 1 }, desc: '1炖汤+1干粮 → 1盛宴', req: 'cook' },
+  { id: 'ration_box', name: '军用口粮盒', in: { ingot: 1, mushmeal: 1 }, out: { ration_box: 1 }, desc: '1金属锭+1菌粮团 → 1口粮盒', req: 'cook' },
+  { id: 'stamina_bar', name: '耐力棒', in: { fungus: 2, fiber: 1 }, out: { stamina_bar: 1 }, desc: '2菌丝+1纤维 → 1耐力棒', req: 'cook' },
+  // 医疗
+  { id: 'bandage', name: '止血绷带', in: { fiber: 3 }, out: { bandage: 1 }, desc: '3纤维 → 1绷带' },
+  { id: 'herb_poultice', name: '草药敷剂', in: { resin: 2, fiber: 1 }, out: { herb_poultice: 1 }, desc: '2树脂+1纤维 → 1敷剂' },
+  { id: 'salve', name: '治疗药膏', in: { resin: 1, clay: 1 }, out: { salve: 1 }, desc: '1树脂+1黏土 → 1药膏' },
+  { id: 'elixir', name: '生命药剂', in: { fungus: 3, brine: 2 }, out: { elixir: 1 }, desc: '3菌丝+2盐水 → 1药剂' },
+  { id: 'great_elixir', name: '大生命药剂', in: { elixir: 1, specimen: 1 }, out: { great_elixir: 1 }, desc: '1药剂+1样本 → 1大药剂' },
+  { id: 'tonic', name: '补气药汤', in: { brine: 1, fungus: 1 }, out: { tonic: 1 }, desc: '1盐水+1菌丝 → 1药汤' },
+  { id: 'antidote', name: '净化剂', in: { resin: 1, specimen: 1 }, out: { antidote: 1 }, desc: '1树脂+1样本 → 1净化剂' },
+  // 材料（req: smelt/weave 冶炼/纺织工艺）
+  { id: 'smelt', name: '精炼金属', in: { metal: 2 }, out: { ingot: 1 }, desc: '2金属残片 → 1金属锭', req: 'smelt' },
+  { id: 'weave', name: '编织纤维', in: { fiber: 2 }, out: { cloth: 1 }, desc: '2纤维 → 1纤维布', req: 'weave' },
+  { id: 'plank', name: '削木板', in: { wood: 2 }, out: { plank: 1 }, desc: '2木材 → 1木板' },
+  { id: 'brick', name: '烧泥砖', in: { clay: 2, stone: 1 }, out: { brick: 1 }, desc: '2黏土+1燧石 → 1泥砖' },
+  { id: 'bone_knife', name: '骨刀', in: { bone: 1, stone: 1 }, out: { bone_knife: 1 }, desc: '1骸骨+1燧石 → 1骨刀' },
+  { id: 'tool_kit', name: '工具包', in: { ingot: 2, bone: 1 }, out: { tool_kit: 1 }, desc: '2金属锭+1骸骨 → 1工具包', req: 'smelt' },
+  // 武器（req: smelt 冶炼工艺）
+  { id: 'stone_axe', name: '石斧', in: { stone: 2, wood: 1 }, out: { stone_axe: 1 }, desc: '2燧石+1木材 → 1石斧' },
+  { id: 'wood_spear', name: '木矛', in: { wood: 2, stone: 1 }, out: { wood_spear: 1 }, desc: '2木材+1燧石 → 1木矛' },
+  { id: 'flint_dagger', name: '燧石匕首', in: { stone: 1, fiber: 1 }, out: { flint_dagger: 1 }, desc: '1燧石+1纤维 → 1匕首' },
+  { id: 'bone_spear', name: '骨矛', in: { bone: 2, fiber: 1 }, out: { bone_spear: 1 }, desc: '2骸骨+1纤维 → 1骨矛' },
+  { id: 'metal_sword', name: '金属剑', in: { ingot: 2, bone: 1 }, out: { metal_sword: 1 }, desc: '2金属锭+1骸骨 → 1金属剑', req: 'smelt' },
+  { id: 'warpaint', name: '战纹颜料', in: { resin: 1, clay: 1 }, out: { warpaint: 1 }, desc: '1树脂+1黏土 → 1颜料' },
+  // 护甲（req: weave 纺织工艺）
+  { id: 'leather_armor', name: '皮甲', in: { hide: 3, fiber: 2 }, out: { leather_armor: 1 }, desc: '3兽皮+2纤维 → 1皮甲', req: 'weave' },
+  { id: 'shell_armor', name: '甲壳护甲', in: { hide: 2, metal: 1 }, out: { shell_armor: 1 }, desc: '2兽皮+1金属 → 1护甲', req: 'weave' },
+  { id: 'bone_armor', name: '骨甲', in: { bone: 3, fiber: 2 }, out: { bone_armor: 1 }, desc: '3骸骨+2纤维 → 1骨甲', req: 'weave' },
+  { id: 'metal_helmet', name: '金属头盔', in: { metal: 2, hide: 1 }, out: { metal_helmet: 1 }, desc: '2金属+1兽皮 → 1头盔' },
+  // 精神与照明
+  { id: 'torch', name: '火把', in: { wood: 1, resin: 1 }, out: { torch: 1 }, desc: '1木材+1树脂 → 1火把' },
+  { id: 'campfire', name: '取暖火堆', in: { wood: 2, stone: 1 }, out: { campfire: 1 }, desc: '2木材+1燧石 → 1火堆' },
+  { id: 'tent', name: '简易帐篷', in: { fiber: 3, wood: 2 }, out: { tent: 1 }, desc: '3纤维+2木材 → 1帐篷', req: 'weave' },
+  { id: 'lamp', name: '异星提灯', in: { metal: 1, resin: 1, gem: 1 }, out: { lamp: 1 }, desc: '1金属+1树脂+1宝石 → 1提灯' },
+  { id: 'shrine', name: '图腾', in: { wood: 3, hide: 1 }, out: { shrine: 1 }, desc: '3木材+1兽皮 → 1图腾' },
+  // 研究与探索
+  { id: 'notes', name: '研究笔记', in: { specimen: 2 }, out: { notes: 1 }, desc: '2生物样本 → 1笔记' },
+  { id: 'gem_report', name: '宝石分析', in: { gem: 1, notes: 1 }, out: { gem_report: 1 }, desc: '1宝石+1笔记 → 1分析报告' },
+  { id: 'codex', name: '知识法典', in: { notes: 2, gem: 1 }, out: { codex: 1 }, desc: '2笔记+1宝石 → 1法典' },
+  { id: 'scout_flag', name: '勘探旗', in: { fiber: 1, wood: 1 }, out: { scout_flag: 1 }, desc: '1纤维+1木材 → 1勘探旗' },
+  { id: 'map', name: '简易地图', in: { hide: 1, resin: 1 }, out: { map: 1 }, desc: '1兽皮+1树脂 → 1地图' },
+  // ===== 深部新区配方 =====
+  { id: 'spore_bread', name: '孢子面包', in: { fungus: 3 }, out: { spore_bread: 1 }, desc: '3菌丝块 → 1孢子面包', req: 'cook' },
+  { id: 'tide_water', name: '潮汐净水', in: { brine: 2, fiber: 1 }, out: { tide_water: 1 }, desc: '2盐水+1纤维 → 1潮汐净水', req: 'cook' },
+  { id: 'detox', name: '强力解毒剂', in: { venom: 1, resin: 1 }, out: { detox: 1 }, desc: '1毒液+1树脂 → 1解毒剂' },
+  { id: 'venom_dart', name: '毒液吹箭', in: { venom: 1, wood: 1 }, out: { venom_dart: 1 }, desc: '1毒液+1木材 → 1吹箭', req: 'smelt' },
+  { id: 'obsidian_blade', name: '黑曜石刃', in: { obsidian: 1, bone: 1 }, out: { obsidian_blade: 1 }, desc: '1黑曜石+1骸骨 → 1黑曜石刃', req: 'smelt' },
+  { id: 'star_sword', name: '星辉剑', in: { star_dust: 1, ingot: 1 }, out: { star_sword: 1 }, desc: '1星尘+1金属锭 → 1星辉剑', req: 'smelt' },
+  { id: 'obsidian_armor', name: '黑曜石甲', in: { obsidian: 2, hide: 2 }, out: { obsidian_armor: 1 }, desc: '2黑曜石+2兽皮 → 1黑曜石甲', req: 'smelt' },
+  { id: 'obsidian_charm', name: '黑曜石护符', in: { obsidian: 1, resin: 1 }, out: { obsidian_charm: 1 }, desc: '1黑曜石+1树脂 → 1护符', req: 'smelt' },
+  { id: 'wind_whistle', name: '风哨', in: { bone: 1, clay: 1 }, out: { wind_whistle: 1 }, desc: '1骸骨+1黏土 → 1风哨', req: 'weave' },
+  { id: 'magnet_boots', name: '磁力靴', in: { metal: 2, hide: 1 }, out: { magnet_boots: 1 }, desc: '2金属+1兽皮 → 1磁力靴', req: 'smelt' },
+  { id: 'star_amulet', name: '星辉护符', in: { star_dust: 1, gem: 1 }, out: { star_amulet: 1 }, desc: '1星尘+1宝石 → 1护符' },
+  { id: 'star_ingot', name: '星铁锭', in: { star_dust: 2, ingot: 1 }, out: { star_ingot: 1 }, desc: '2星尘+1金属锭 → 1星铁锭', req: 'smelt' },
+  // ===== 材料体系补充配方 =====
+  { id: 'dried_fungus', name: '晒干菌片', in: { fungus: 2 }, out: { dried_fungus: 1 }, desc: '2菌丝块 → 1干菌' },
+  { id: 'salt_meat', name: '盐渍肉', in: { brine: 1, specimen: 1 }, out: { salt_meat: 1 }, desc: '1盐水+1样本 → 1盐渍肉', req: 'cook' },
+  { id: 'stone_blade', name: '磨石刀', in: { stone: 2, wood: 1 }, out: { stone_blade: 1 }, desc: '2燧石+1木材 → 1石刀' },
+  { id: 'wood_shield', name: '制木盾', in: { wood: 2, fiber: 1 }, out: { wood_shield: 1 }, desc: '2木材+1纤维 → 1木盾' },
+  { id: 'bone_ring', name: '雕骨戒', in: { bone: 1, gem: 1 }, out: { bone_ring: 1 }, desc: '1骸骨+1宝石 → 1骨戒' },
+  { id: 'venom_arrow', name: '淬毒箭', in: { venom: 1, wood: 1, bone: 1 }, out: { venom_arrow: 1 }, desc: '1毒液+1木材+1骸骨 → 1毒箭' },
+  // ===== 工艺研究解锁的替代配方（各专属工艺研究） =====
+  { id: 'alch_elixir', name: '炼金药剂', in: { resin: 2, brine: 1 }, out: { elixir: 1 }, desc: '2树脂+1盐水 → 1生命药剂', req: 'alchemy' },
+  { id: 'leather_vest', name: '鞣制皮甲', in: { hide: 2, cloth: 1 }, out: { leather_armor: 1 }, desc: '2兽皮+1纤维布 → 1皮甲', req: 'leather' },
+  { id: 'bone_carving', name: '骨雕长矛', in: { bone: 2, hide: 1 }, out: { bone_spear: 1 }, desc: '2骸骨+1兽皮 → 1骨矛', req: 'bonecraft' },
+  { id: 'crystal_gear', name: '晶簇利刃', in: { gem: 1, stone: 1 }, out: { flint_dagger: 1 }, desc: '1宝石+1燧石 → 1燧石匕首', req: 'crystalwork' },
+  { id: 'glass_filter', name: '玻璃净水器', in: { clay: 1, stone: 1 }, out: { pure_water: 2 }, desc: '1黏土+1燧石 → 2净水', req: 'glasswork' },
+  { id: 'tool_mk', name: '精密工具', in: { metal: 2, wood: 1 }, out: { tool_kit: 1 }, desc: '2金属残片+1木材 → 1工具包', req: 'mechanism' },
+  { id: 'stone_wall', name: '石砖堆', in: { stone: 2, clay: 1 }, out: { brick: 2 }, desc: '2燧石+1黏土 → 2泥砖', req: 'masonry' },
+  { id: 'botanist_pack', name: '药草包', in: { fungus: 2, resin: 1 }, out: { herb_poultice: 1 }, desc: '2菌丝块+1树脂 → 1草药敷剂', req: 'botany' },
+  { id: 'chem_purify', name: '化学净化剂', in: { brine: 2, fungus: 1 }, out: { antidote: 1 }, desc: '2盐水+1菌丝块 → 1净化剂', req: 'chemistry' },
+  { id: 'carved_talisman', name: '雕刻圣像', in: { stone: 2, hide: 1 }, out: { shrine: 1 }, desc: '2燧石+1兽皮 → 1图腾', req: 'sculpt' },
+])
